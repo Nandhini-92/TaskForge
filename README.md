@@ -1,784 +1,435 @@
-# TaskForge — AI-Powered Multi-Tenant SaaS Project Management Platform
 
-TaskForge is a full-stack SaaS project management platform built with **Next.js, NestJS, PostgreSQL, Redis, Socket.IO, Docker, and CI/CD**.
+# TaskForge - AI-Powered Multi-Tenant SaaS Project Management Platform
 
-It provides organization-based workspaces, role-based access control, project and task management, Kanban workflows, real-time notifications, email workflows, and an analytics dashboard.
+TaskForge is a full-stack SaaS project management platform designed to help teams organize projects, manage tasks, collaborate efficiently, and track work in real time.
 
-Additionally, TaskForge includes an **AI-powered task planning feature** that helps users break down a task into suggested subtasks, estimate the effort required, and provide contextual reasoning.
+Built using Next.js, NestJS, PostgreSQL, Redis, Socket.IO, Docker, and AI integration, TaskForge provides organization-based workspaces, role-based access control, project and task management, real-time notifications, analytics, and AI-assisted task creation.
 
----
+## Features
 
-## Why This Project Stands Out
+### Authentication and Security
 
-- Multi-tenant SaaS architecture with organization-based workspaces
-- Role-based access control for workspace members
-- Project and task management
-- Kanban-style task workflows
-- Dashboard with task and project analytics
-- Real-time notifications using Socket.IO
-- Email notification workflows using Nodemailer
-- JWT-based authentication with refresh token support
-- PostgreSQL and Redis backend architecture
-- Background job processing using BullMQ
-- Docker-based local and production setup
-- CI/CD configuration with GitHub Actions
-- **AI-powered task planning with suggested subtasks and effort estimation**
-
----
-
-# AI-Powered Task Suggestions
-
-TaskForge includes an AI-assisted feature designed to make task planning easier.
-
-While creating a task, the user can use **Generate with AI** to receive intelligent suggestions based on the task title.
-
-The AI can provide:
-
-- Suggested subtasks
-- Estimated effort
-- Contextual reasoning
-
-For example, for the task:
-
-```text
-Build authentication system
-```
-
-The AI can generate suggestions such as:
-
-- Design authentication schema
-- Implement email/password login
-- Add OAuth integration
-- Create password reset flow
-- Write unit tests
-
-It can also provide:
-
-```text
-Estimated effort: Medium
-```
-
-along with reasoning based on the complexity of the requested task.
-
-This feature helps users convert a high-level task into smaller, actionable steps before adding it to their project workflow.
-
----
-
-# Core Features
-
-## Authentication
-
-TaskForge supports authentication features including:
-
-- User registration
-- User login
+- User registration and login
+- JWT-based authentication
+- Access and refresh token support
+- Password reset functionality
+- Email verification
 - Protected routes
-- JWT authentication
-- Refresh token handling
-- Password hashing using argon2
-- Password reset workflow
+- Role-based access control
+- Request validation and centralized error handling
+- Rate limiting
 
----
+## Multi-Tenant Organizations
 
-## Organizations and Multi-Tenancy
+TaskForge supports multiple organizations and workspaces.
 
-Users can work inside organization-based workspaces.
+Users can:
 
-Features include:
+- Create organizations
+- Switch between organizations
+- Invite members
+- Accept organization invitations
+- Manage organization members
+- Work within isolated organization-based data
 
-- Creating organizations
-- Switching between organizations
-- Organization-based data isolation
-- Managing organization members
-- Sending invitations
-- Role-based permissions
-
-Each workspace maintains its own projects, tasks, members, and activity.
-
----
+Each organization maintains its own projects, tasks, members, and activities.
 
 ## Project Management
 
 Users can:
 
 - Create projects
-- View workspace projects
-- Access project details
-- Manage tasks within projects
-- Track project progress
+- Update project details
+- View projects within an organization
+- Organize tasks under specific projects
+- Track project activity
 
-Projects act as containers for organizing related tasks and workflows.
-
----
+Projects provide a structured way to manage related tasks and team workflows.
 
 ## Task Management
 
-Each task can contain:
+TaskForge provides a complete task management system.
 
-- Title
-- Description
-- Status
-- Priority
-- Assignee
-- Due date
+Users can:
 
-Tasks can move through different workflow states such as:
+- Create tasks
+- Update tasks
+- Assign tasks to organization members
+- Set priorities
+- Set due dates
+- Update task status
+- Filter tasks
+- Organize tasks by project
+- View detailed task information
+
+Supported task statuses include:
 
 - To Do
 - In Progress
-- Done
+- Completed
 
-Task management is designed to support project planning and progress tracking.
+Tasks can also be managed using a Kanban-style workflow.
 
----
+## AI-Powered Task Assistance
 
-## AI-Assisted Task Creation
+TaskForge includes an AI-assisted feature to make task creation faster and easier.
 
-During task creation, users can generate AI suggestions to help plan the task.
+While creating a task, users can use Generate with AI to receive intelligent suggestions based on the task information provided.
 
-The AI-generated information includes:
+The AI can automatically suggest:
 
-### Suggested Subtasks
+- Task description
+- Task priority
+- Due date
 
-The task can be broken into smaller implementation steps.
+Users can review the generated suggestions and use them while creating the task.
 
-### Estimated Effort
-
-The AI provides an estimated effort level based on the task.
-
-### AI Reasoning
-
-The AI explains the reasoning behind the suggested breakdown and effort estimate.
-
-This helps users quickly plan complex tasks without manually thinking through every implementation step.
-
----
+This helps reduce the effort required to manually fill in task details.
 
 ## Dashboard and Analytics
 
-The dashboard provides an overview of workspace activity.
+The dashboard provides an overview of the organization's workspace.
 
-It includes:
+Users can view:
 
-- Total projects
-- Total tasks
-- Tasks currently in progress
-- Task completion percentage
-- Task flow over time
+- Task statistics
 - Task status distribution
+- Priority distribution
+- Recent activity
+- Upcoming deadlines
+- Workflow summaries
+- Workspace health
 
-The dashboard helps users quickly understand the current state of their workspace.
-
----
-
-## Kanban Workflow
-
-Tasks can be organized according to their status.
-
-The workflow supports task movement between columns such as:
-
-```text
-To Do → In Progress → Done
-```
-
-This provides a visual way to track project progress.
-
----
+The dashboard helps users quickly understand the current state of their projects and tasks.
 
 ## Real-Time Notifications
 
-TaskForge includes a notification system for important workspace activity.
+TaskForge supports real-time updates using Socket.IO.
 
-Notifications can be generated for events such as:
+Users can receive notifications for events such as:
 
 - Task assignments
-- Task updates
-- Member activity
+- Project activity
 - Organization events
+- Other workspace updates
 
-The application uses **Socket.IO** for real-time communication.
+The application also supports notification management through the dashboard.
 
----
+## Activity Tracking
+
+TaskForge records important actions performed within an organization.
+
+Activity tracking helps users monitor events such as:
+
+- Task creation
+- Task updates
+- Project changes
+- Organization-related actions
+
+This provides better visibility into team activity and workspace changes.
 
 ## Email Workflows
 
-The backend includes email functionality using Nodemailer.
+The backend supports email-based workflows including:
 
-Email workflows can support:
-
+- Email verification
+- Password reset
 - Organization invitations
 - Task assignment notifications
-- Other application events
 
-SMTP configuration can be provided through environment variables.
+Email templates are handled through the backend mail module.
 
----
+## Subscription and Billing Architecture
 
-## Role-Based Access Control
+TaskForge includes a billing architecture designed to support subscription-based plans.
 
-TaskForge supports role-based permissions inside organizations.
+The system includes support for:
 
-Access control ensures that users can perform actions according to their assigned role.
+- Subscription plans
+- Usage tracking
+- Plan limits
+- Stripe integration
+- Checkout sessions
+- Webhook handling
 
-The application uses authentication and authorization guards to protect sensitive operations.
+This architecture makes the application suitable for a SaaS-based subscription model.
 
----
+## System Architecture
 
-# Tech Stack
+TaskForge follows a modern full-stack architecture.
 
-| Layer | Technology |
-|---|---|
-| Frontend | Next.js 15 |
-| UI | React 19 |
-| Language | TypeScript |
-| Styling | Tailwind CSS 4 |
-| Client State | Zustand |
-| Server State | TanStack React Query |
-| Drag and Drop | dnd-kit |
-| Backend | NestJS 11 |
-| Database | PostgreSQL 16 |
-| ORM | TypeORM |
-| Cache | Redis 7 |
-| Redis Client | ioredis |
-| Background Jobs | BullMQ |
-| Real-Time Communication | Socket.IO |
-| Authentication | JWT + Passport |
-| Password Hashing | argon2 |
-| Email | Nodemailer |
-| Logging | Pino |
-| Containerization | Docker |
-| CI/CD | GitHub Actions |
-| AI Feature | AI-powered task suggestion and planning |
+```
+                +---------------------+
+                |      Next.js        |
+                |      Frontend       |
+                +----------+----------+
+                           |
+                           | REST API
+                           |
+                +----------v----------+
+                |      NestJS         |
+                |      Backend        |
+                +-------+-------+-----+
+                        |       |
+             +----------v-+   +-v----------+
+             | PostgreSQL |   |   Redis    |
+             |  Database  |   | Cache/Queue|
+             +------------+   +------------+
+                        |
+                 +------v------+
+                 |  Socket.IO  |
+                 |  Real-Time  |
+                 +-------------+
+````
 
----
+## Tech Stack
 
-# Project Structure
+### Frontend
 
-```text
-TaskForge/
-│
-├── .github/
-│   └── workflows/                    # CI/CD workflows
-│
-├── frontend/                         # Next.js frontend
-│   ├── src/
-│   │   ├── app/                      # Application pages
-│   │   │   ├── auth/                 # Authentication pages
-│   │   │   └── dashboard/            # Dashboard pages
-│   │   │
-│   │   ├── components/               # Reusable UI components
-│   │   ├── features/                 # Feature modules
-│   │   │   ├── tasks/
-│   │   │   ├── projects/
-│   │   │   └── organizations/
-│   │   │
-│   │   ├── hooks/                    # Shared hooks
-│   │   ├── lib/                      # Utilities and API configuration
-│   │   ├── store/                    # Zustand stores
-│   │   └── types/                    # TypeScript interfaces
-│   │
-│   ├── package.json
-│   └── next.config.ts
-│
-├── backend/                          # NestJS backend
-│   └── src/
-│       ├── modules/
-│       │   ├── auth/                 # Authentication
-│       │   ├── users/                # User management
-│       │   ├── organizations/        # Organizations and memberships
-│       │   ├── projects/             # Project management
-│       │   ├── tasks/                # Task management
-│       │   ├── activity/             # Activity logging
-│       │   ├── realtime/             # WebSocket functionality
-│       │   ├── notifications/        # Notification system
-│       │   ├── mail/                 # Email service
-│       │   ├── billing/              # Billing architecture
-│       │   └── health/               # Health checks
-│       │
-│       ├── infrastructure/           # Database, Redis and queues
-│       ├── common/                   # Guards, decorators and filters
-│       └── shared/                   # Shared enums and interfaces
-│
-├── nginx/                            # Nginx configuration
-│
-├── scripts/                          # Utility and deployment scripts
-│
-├── docker-compose.yml                # Development Docker setup
-├── docker-compose.prod.yml           # Production Docker setup
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── LICENSE
-└── README.md
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* React Query
+* Zustand
+* Socket.IO Client
+
+### Backend
+
+* NestJS
+* TypeScript
+* TypeORM
+* PostgreSQL
+* Redis
+* JWT Authentication
+* Socket.IO
+* Stripe
+* AI API Integration
+
+### DevOps and Infrastructure
+
+* Docker
+* Docker Compose
+* Nginx
+* Vercel deployment configuration
+
+## Project Structure
+
+
+TaskForge
+|
+|-- frontend
+|   |-- src
+|   |   |-- app
+|   |   |-- components
+|   |   |-- features
+|   |   |-- hooks
+|   |   |-- lib
+|   |   |-- store
+|   |   `-- types
+|
+|-- backend
+|   |-- src
+|   |   |-- common
+|   |   |-- config
+|   |   |-- infrastructure
+|   |   |-- modules
+|   |   `-- shared
+|
+|-- nginx
+|
+|-- scripts
+|
+|-- docs
+|
+|-- docker-compose.yml
+|
+`-- docker-compose.prod.yml
 ```
 
----
+## Running the Project Locally
 
-# Getting Started
+### Prerequisites
 
-## Prerequisites
+Make sure you have the following installed:
 
-Before running the project locally, install:
+* Node.js
+* npm
+* Docker
+* Docker Compose
 
-- Node.js 20+
-- PostgreSQL 16+
-- Redis 7+
+### Clone the Repository
 
-Docker can also be used for the containerized setup.
-
----
-
-# Backend Setup
-
-Navigate to the backend directory:
-
-```bash
-cd backend
+```
+git clone <your-repository-url>
+cd TaskForge
 ```
 
-Install dependencies:
+### Configure Environment Variables
 
-```bash
-npm install
-```
+Create the required environment files based on the provided examples.
 
-Create the environment file:
-
-```bash
-cp .env.example .env
-```
-
-Update the environment variables with your local configuration.
-
-Run database migrations:
-
-```bash
-npm run migration:run
-```
-
-Start the backend development server:
-
-```bash
-npm run start:dev
-```
-
-The backend runs on:
-
-```text
-http://localhost:3000
-```
-
-For background jobs, run the worker separately if required:
-
-```bash
-npm run start:worker:dev
-```
-
----
-
-# Frontend Setup
-
-Open another terminal and navigate to the frontend directory:
-
-```bash
-cd frontend
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create the local environment file:
-
-```bash
-cp .env.local.example .env.local
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-The frontend runs on:
-
-```text
-http://localhost:3001
-```
-
----
-
-# Running the Application
-
-After starting both the backend and frontend:
-
-1. Open:
-
-```text
-http://localhost:3001
-```
-
-2. Register a new account.
-
-3. Create or access an organization.
-
-4. Create a project.
-
-5. Create tasks inside the project.
-
-6. Use **Generate with AI** when creating a task to receive suggested subtasks and effort estimation.
-
----
-
-# Docker Setup
-
-TaskForge includes Docker Compose configuration for running the application.
-
-To build and start the containers:
-
-```bash
-docker-compose up --build
-```
-
-To run the containers in detached mode:
-
-```bash
-docker-compose up -d --build
-```
-
-To stop the containers:
-
-```bash
-docker-compose down
-```
-
-The project also includes:
-
-```text
-docker-compose.prod.yml
-```
-
-for production-oriented configuration.
-
----
-
-# Environment Variables
-
-## Backend `.env`
-
-Example configuration:
+For the backend, configure variables such as:
 
 ```env
-# Server
-PORT=3000
-NODE_ENV=development
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_NAME=
 
-# Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=postgres
-DB_NAME=taskforge
+JWT_SECRET=
 
-# Redis
-REDIS_HOST=localhost
-REDIS_PORT=6379
+REDIS_HOST=
+REDIS_PORT=
 
-# Authentication
-JWT_SECRET=your-secret-key-at-least-32-characters-long
-ACCESS_TOKEN_TTL=15m
-REFRESH_TOKEN_TTL=7d
+OPENAI_API_KEY=
+GROQ_API_KEY=
 
-# Email
-SMTP_HOST=localhost
-SMTP_PORT=587
-SMTP_SECURE=false
 SMTP_USER=
 SMTP_PASS=
-SMTP_FROM=TaskForge <noreply@taskforge.io>
-
-# Billing
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
-
-# Frontend
-FRONTEND_URL=http://localhost:3001
 ```
 
----
+### Run Using Docker
 
-## Frontend `.env.local`
+From the project root:
 
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3000
-NEXT_PUBLIC_SOCKET_URL=http://localhost:3000
+```
+docker compose up --build
 ```
 
----
-
-# API Overview
-
-## Authentication
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/v1/auth/register` | Register a new user |
-| POST | `/api/v1/auth/login` | Login |
-| POST | `/api/v1/auth/refresh` | Refresh authentication tokens |
-| GET | `/api/v1/auth/me` | Get current user |
-| POST | `/api/v1/auth/logout` | Logout |
-
----
-
-## Organizations
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/v1/organizations` | Create an organization |
-| GET | `/api/v1/organizations` | Get user organizations |
-| POST | `/api/v1/organizations/switch` | Switch active organization |
-| GET | `/api/v1/organizations/current` | Get current organization |
-| GET | `/api/v1/organizations/members` | Get organization members |
-| POST | `/api/v1/organizations/invites` | Send organization invitation |
-
----
-
-## Projects
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/v1/projects` | Create a project |
-| GET | `/api/v1/projects` | Get projects |
-| GET | `/api/v1/projects/{id}` | Get project details |
-| PATCH | `/api/v1/projects/{id}` | Update project |
-
----
-
-## Tasks
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/v1/projects/{id}/tasks` | Create a task |
-| GET | `/api/v1/tasks` | Get tasks |
-| PATCH | `/api/v1/tasks/{id}` | Update a task |
-
-Task creation supports information such as:
-
-- Title
-- Description
-- Status
-- Priority
-- Assignee
-- Due date
-
-The AI-powered task planning feature can assist the user during task creation.
-
----
-
-## Notifications
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/v1/notifications` | Get notifications |
-| GET | `/api/v1/notifications/unread-count` | Get unread notification count |
-| POST | `/api/v1/notifications/{id}/read` | Mark a notification as read |
-| POST | `/api/v1/notifications/read-all` | Mark all notifications as read |
-
----
-
-# Real-Time Architecture
-
-TaskForge uses Socket.IO for real-time communication.
-
-A typical flow is:
-
-```text
-Client
-   │
-   ▼
-Next.js Frontend
-   │
-   ▼
-NestJS API
-   │
-   ├───────────────┐
-   ▼               ▼
-PostgreSQL       Redis
-   │
-   ▼
-Domain Events
-   │
-   ├───────────────┬────────────────┐
-   ▼               ▼                ▼
-BullMQ         Socket.IO       Notifications
-Queue          Broadcast
-   │
-   ▼
-Worker
-```
-
-Real-time communication can support:
-
-- Task events
-- Organization events
-- Notifications
-- Member activity
-
----
-
-# Authentication and Authorization Flow
-
-A typical request flow follows this structure:
-
-```text
-Client
-   │
-   ▼
-Next.js Application
-   │
-   ▼
-NestJS API
-   │
-   ▼
-Authentication Guard
-   │
-   ▼
-Organization Membership Check
-   │
-   ▼
-Role-Based Authorization
-   │
-   ▼
-Service Layer
-   │
-   ├──────────► PostgreSQL
-   │
-   └──────────► Redis
-```
-
-This structure helps protect organization resources and ensures users can only access authorized data.
-
----
-
-# Multi-Tenant Architecture
-
-TaskForge is designed around organization-based workspaces.
-
-Each organization can maintain its own:
-
-- Members
-- Projects
-- Tasks
-- Notifications
-- Activity
-
-The application validates organization context and membership before allowing access to organization-specific functionality.
-
----
-
-# Event-Driven Architecture
-
-Application events can trigger multiple actions.
-
-For example:
-
-```text
-Task Created
-     │
-     ▼
-Domain Event
-     │
- ┌───┼───────────────┐
- ▼   ▼               ▼
-Activity      Notification      Real-Time
-Logging       Creation          Broadcast
-```
-
-Background processing can be handled using BullMQ workers.
-
----
-
-# AI Task Planning Workflow
-
-The AI-assisted task feature follows a workflow similar to:
-
-```text
-User enters task title
-        │
-        ▼
-Click "Generate with AI"
-        │
-        ▼
-AI processes task context
-        │
-        ├──────────────► Suggested Subtasks
-        │
-        ├──────────────► Estimated Effort
-        │
-        └──────────────► AI Reasoning
-        │
-        ▼
-User continues creating the task
-```
-
-The feature is intended to help users transform broad tasks into smaller, more manageable pieces of work.
-
----
-
-# Use TaskForge as a Reference For
-
-This project demonstrates concepts related to:
-
-- Full-stack web development
-- Next.js application architecture
-- NestJS backend architecture
-- Multi-tenant SaaS applications
-- Organization-based access control
-- JWT authentication
-- Role-based authorization
-- Project management systems
-- Task management workflows
-- Kanban-style interfaces
-- Real-time applications with Socket.IO
-- Redis caching
-- PostgreSQL with TypeORM
-- Background jobs with BullMQ
-- Docker containerization
-- CI/CD workflows
-- AI-assisted task planning
-
----
-
-# Future Improvements
-
-Potential improvements include:
-
-- Production deployment
-- More advanced AI task recommendations
-- AI-generated task descriptions
-- AI-based project planning
-- Improved analytics
-- Advanced reporting
-- Additional collaboration features
-- Expanded automated testing
-- Enhanced mobile responsiveness
-
----
-
-# Contributing
-
-Contributions are welcome.
-
-Please review the project's:
-
-- `CONTRIBUTING.md`
-- `CODE_OF_CONDUCT.md`
-
-before submitting changes.
-
----
-
-# License
-
-This project is licensed under the MIT License.
+This starts:
+
+* PostgreSQL
+* Redis
+* Backend API
+* Background worker
+* Database migrations
+
+The frontend can be started separately from the `frontend` directory.
+
+## Key Backend Modules
+
+The backend is organized into modular domains.
+
+### Authentication
+
+Handles:
+
+* Registration
+* Login
+* JWT authentication
+* Refresh tokens
+* Password reset
+* Email verification
+
+### Organizations
+
+Handles:
+
+* Organization creation
+* Member management
+* Invitations
+* Organization switching
+
+### Projects
+
+Handles project creation, updates, and organization-level project management.
+
+### Tasks
+
+Handles:
+
+* Task creation
+* Task updates
+* Task filtering
+* Task assignment
+* Task priorities
+* Task statuses
+* Due dates
+
+### AI
+
+Provides AI-powered assistance for generating task details.
+
+### Notifications
+
+Handles application and real-time notifications.
+
+### Activity
+
+Tracks important actions and events across the workspace.
+
+### Billing
+
+Provides subscription, plan, usage, and Stripe integration architecture.
+
+### Real-Time
+
+Uses Socket.IO for real-time events and updates.
+
+## Security Features
+
+The application includes several security-focused practices:
+
+* JWT authentication
+* Access and refresh tokens
+* Password hashing
+* Protected API routes
+* Role-based authorization
+* Organization-level data isolation
+* Environment-based secrets
+* Request validation
+* Rate limiting
+* Centralized exception handling
+
+## Docker Support
+
+The project includes Docker configuration for containerized development and deployment.
+
+Available services include:
+
+* PostgreSQL
+* Redis
+* Backend API
+* Background worker
+* Database migrations
+* Nginx for production deployment
+
+Docker Compose simplifies running the complete backend infrastructure locally.
+
+## Future Improvements
+
+Possible future improvements include:
+
+* Advanced AI task recommendations
+* AI-generated project planning
+* Team productivity analytics
+* File attachments
+* Calendar integration
+* Advanced search
+* Mobile application
+* Additional third-party integrations
+
+## Why This Project Stands Out
+
+TaskForge demonstrates experience with:
+
+* Full-stack application development
+* Multi-tenant SaaS architecture
+* Role-based access control
+* REST API design
+* Real-time communication
+* Redis caching and queues
+* PostgreSQL and TypeORM
+* Dockerized infrastructure
+* Authentication and security
+* Email workflows
+* Subscription architecture
+* AI-powered task assistance
+
+## Author
+
+Nandhini Janjala
+
+Built as a full-stack project to explore scalable SaaS architecture, real-time collaboration, and AI-assisted productivity workflows.
